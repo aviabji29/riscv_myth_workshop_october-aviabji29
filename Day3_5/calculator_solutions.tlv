@@ -109,4 +109,36 @@
    *failed = 1'b0;
 \SV
    endmodule
+   
+   
+\TLV
+   //program on cycle caluclator with validity
+ 
+   |calc //represents a pipeline
+      @0   //stage 0 pipeline--> reset state
+         $reset = *reset;
+      @1  //stage 1 
+         $valid = $reset ? 0 : (>>1$valid+ 1 ) ;   //counter
+         $valid_or_reset = $valid || $reset ; 
+      ?$valid
+         @1 //stage 1 for which valid signal is applicable
+            $sum[31:0]  = $val1[31:0] + $val2[31:0] ; //airthemetic_opertions
+            $diff[31:0] = $val1[31:0] - $val2[31:0] ;
+            $prod[31:0] = $val1[31:0] * $val2[31:0] ;
+            $quot[31:0] = $val1[31:0] / $val2[31:0] ;
+            $val1[31:0] = >>2$out[31:0] ; //output ahead  by 2
+            $val2[31:0] = $rand2[3:0] ;
+            
+            
+      @2 //stage 2 refers output operation
+         //in this if valid_or_reset signal is zero ==>output gives previous values else compuated value based on opcode
+        $out[31:0] = ($valid_or_reset )==1'b0 ? >>1$out[31:0] : $op[0] ? ($op[1] ? $quot : $diff ) : ($op[1] ? $prod : $sum )   ; 
+
+
+   // Assert these to end simulation (before Makerchip cycle limit).
+   *passed = *cyc_cnt > 40;
+   *failed = 1'b0;
+\SV
+   endmodule
+
 
