@@ -38,18 +38,7 @@
 
 
 
-\m4_TLV_version 1d: tl-x.org
-\SV
 
-   // =========================================
-   // Welcome!  Try the tutorials via the menu.
-   // =========================================
-
-   // Default Makerchip TL-Verilog Code Template
-   
-   // Macro providing required top-level module definition, random
-   // stimulus support, and Verilator config.
-   m4_makerchip_module   // (Expanded in Nav-TLV pane.)
    //sequential calc
 \TLV
    $reset = *reset;
@@ -70,17 +59,7 @@
    
    
    
-   \m4_TLV_version 1d: tl-x.org
-\SV
-
-   // =========================================
-   // Welcome!  Try the tutorials via the menu.
-   // =========================================
-
-   // Default Makerchip TL-Verilog Code Template
-   
-   // Macro providing required top-level module definition, random
-   // stimulus support, and Verilator config.
+ 
    m4_makerchip_module   // (Expanded in Nav-TLV pane.)
    //cycle_calc
 \TLV
